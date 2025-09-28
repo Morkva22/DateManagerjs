@@ -1,10 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Async Data Manager</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-$END$
+<div class="container">
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">
+                <span class="icon">⚡</span>
+                ASYNC DATA MANAGER
+                <span class="version">v2.0</span>
+            </h1>
+            <p class="subtitle">Advanced data fetching, caching & management system</p>
+        </div>
+        <div class="status-indicators">
+            <div class="indicator" id="cache-status">
+                <span class="dot"></span>
+                <span class="label">Cache Ready</span>
+            </div>
+            <div class="indicator" id="api-status">
+                <span class="dot"></span>
+                <span class="label">API Connected</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="controls-panel">
+        <div class="control-group">
+            <label for="search-input">🔍 Search Posts</label>
+            <input type="text" id="search-input" placeholder="Search by title or body...">
+        </div>
+
+        <div class="control-group">
+            <label for="sort-select">📊 Sort By</label>
+            <select id="sort-select">
+                <option value="id">ID (Default)</option>
+                <option value="title">Title A-Z</option>
+                <option value="userId">User ID</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="filter-user">👤 Filter by User</label>
+            <select id="filter-user">
+                <option value="">All Users</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <button id="refresh-btn" class="btn btn-primary">
+                <span class="btn-icon">🔄</span>
+                Refresh Data
+            </button>
+        </div>
+
+        <div class="control-group">
+            <button id="clear-cache-btn" class="btn btn-secondary">
+                <span class="btn-icon">🗑️</span>
+                Clear Cache
+            </button>
+        </div>
+    </div>
+
+    <div class="stats-panel">
+        <div class="stat-card">
+            <div class="stat-value" id="total-posts">0</div>
+            <div class="stat-label">Total Posts</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="filtered-posts">0</div>
+            <div class="stat-label">Filtered Results</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="cache-size">0</div>
+            <div class="stat-label">Cache Size</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="request-count">0</div>
+            <div class="stat-label">API Requests</div>
+        </div>
+    </div>
+
+    <div class="pagination-controls">
+        <button id="prev-page" class="btn btn-nav" disabled>
+            <span class="btn-icon">⬅️</span>
+            Previous
+        </button>
+        <div class="page-info">
+            <span>Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+        </div>
+        <button id="next-page" class="btn btn-nav">
+            Next
+            <span class="btn-icon">➡️</span>
+        </button>
+    </div>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading data...</p>
+    </div>
+
+    <div class="error-message" id="error-message">
+        <div class="error-content">
+            <span class="error-icon">⚠️</span>
+            <div class="error-text">
+                <h3>Error occurred</h3>
+                <p id="error-details"></p>
+            </div>
+            <button id="retry-btn" class="btn btn-danger">Retry</button>
+        </div>
+    </div>
+
+    <div class="data-grid" id="data-grid">
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+</div>
+
+<script type="module" src="app.js"></script>
 </body>
 </html>
